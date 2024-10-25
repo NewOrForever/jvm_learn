@@ -1,5 +1,8 @@
 package org.example.memorymodel;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 
 /**
@@ -13,12 +16,16 @@ import java.util.ArrayList;
  */
 public class HeapTest {
     byte[] a = new byte[1024 * 100]; // 100KB
-
+    private static final Logger logger = LoggerFactory.getLogger(HeapTest.class);
     public static void main(String[] args) throws InterruptedException {
-        ArrayList<HeapTest> heapTests = new ArrayList<>();
-        while (true) {
-            heapTests.add(new HeapTest());
-            Thread.sleep(5);
+        try {
+            ArrayList<HeapTest> heapTests = new ArrayList<>();
+            while (true) {
+                heapTests.add(new HeapTest());
+                Thread.sleep(5);
+            }
+        } catch (Throwable e) {
+            logger.error("堆内存测试异常 --------->", e);
         }
     }
 
